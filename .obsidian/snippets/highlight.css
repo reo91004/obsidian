@@ -1,0 +1,15 @@
+.theme-light {
+  --text-highlight-bg: #FAECA0;
+  --text-highlight-underline: #FFD900;
+}
+.theme-dark {
+  --text-highlight-bg: #423C16;
+  --text-highlight-underline: #D0B206;
+}
+mark,
+.cm-highlight {
+    color: var(--text-normal);
+    text-decoration: underline solid var(--text-highlight-underline) 25%;
+    text-decoration-skip-ink: none;
+    text-underline-offset: .25em;
+}
