@@ -1,7 +1,9 @@
 {
-  "cssTheme": "Blue Topaz",
+  "cssTheme": "Minimal",
   "theme": "system",
-  "enabledCssSnippets": [],
+  "enabledCssSnippets": [
+    "big-math"
+  ],
   "translucency": false,
   "showRibbon": true,
   "nativeMenus": false

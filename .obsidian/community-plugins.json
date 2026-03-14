@@ -3,7 +3,6 @@
   "obsidian-style-settings",
   "obsidian-outliner",
   "omnisearch",
-  "obsidian-minimal-settings",
   "obsidian-latex-suite",
   "obsidian-importer",
   "iconic",
@@ -12,7 +11,18 @@
   "dataview",
   "auto-card-link",
   "table-editor-obsidian",
-  "notebook-navigator",
   "templater-obsidian",
-  "update-time-on-edit"
+  "update-time-on-edit",
+  "image-converter",
+  "obsidian-image-toolkit",
+  "obsidian-linter",
+  "notebook-navigator",
+  "open-tab-settings",
+  "default-template",
+  "smart-composer",
+  "obsidian-zoom",
+  "code-styler",
+  "pdf-plus",
+  "waypoint",
+  "frontmatter-viewmode"
 ]

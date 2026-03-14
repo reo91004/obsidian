@@ -1,3 +1,13 @@
 {
-  "promptDelete": false
+  "promptDelete": false,
+  "spellcheck": false,
+  "newFileLocation": "folder",
+  "attachmentFolderPath": "Attachments",
+  "focusNewTab": false,
+  "readableLineLength": true,
+  "propertiesInDocument": "visible",
+  "newFileFolderPath": "00 Inbox",
+  "livePreview": true,
+  "alwaysUpdateLinks": true,
+  "showInlineTitle": true
 }
