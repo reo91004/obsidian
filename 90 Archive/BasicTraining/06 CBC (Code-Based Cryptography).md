@@ -1,21 +1,13 @@
 ---
 type: concept
-status: archive
+status: stable
+context: lab
 created: 2026-01-11T15:14
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:40
 aliases:
-domain:
-  - "[[Cryptography]]"
-  - "[[Coding Theory]]"
-parent:
-related:
 source:
-project:
-area:
 prefer-view: edit
 tags:
-  - area/cryptography
-  - area/coding-theory
 ---
 
 # 1️⃣ Background

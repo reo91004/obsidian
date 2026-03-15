@@ -1,14 +1,11 @@
 ---
 type: paper
 status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
 source:
-project:
-area:
 prefer-view: edit
 tags:
 ---

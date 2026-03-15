@@ -1,19 +1,13 @@
 ---
 type: concept
-status: archive
+status: stable
+context: lab
 created: 2026-01-18T16:58
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:39
 aliases:
-domain:
-  - "[[Cryptography]]"
-parent:
-related:
 source:
-project:
-area:
 prefer-view: edit
 tags:
-  - area/cryptography
 ---
 
 # 0️⃣ Introduction

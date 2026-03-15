@@ -1,20 +1,15 @@
 ---
 type: concept
 status: stable
+context:
 created: 2026-01-19
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:38
 aliases:
-domain:
-  - "[[Cryptography]]"
-parent:
-related:
+  - 타이밍 공격
+  - PACS 03 Timing Attacks-Software
 source: PACS Lecture
-project:
-area:
 prefer-view: edit
 tags:
-  - area/cryptography
-  - kind/reading-note
 ---
 
 # 0️⃣ Introduction to [[Timing Attack]] on Software

@@ -1,13 +1,10 @@
 ---
 type: meeting
-status: inbox
+status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
-project:
-area:
 prefer-view: edit
 tags:
 ---

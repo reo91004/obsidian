@@ -1,21 +1,16 @@
 ---
 type: concept
 status: stable
+context:
 created: 2026-01-20
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:39
 aliases:
   - DPA
-domain:
-  - "[[Cryptography]]"
-parent:
-related:
+  - 차분 전력 분석
+  - PACS 07 DPA
 source: PACS Lecture
-project:
-area:
 prefer-view: edit
 tags:
-  - area/cryptography
-  - kind/reading-note
 ---
 
 # 0️⃣ Introduction to [[DPA]] (Differential Power Analysis)

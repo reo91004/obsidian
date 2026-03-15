@@ -47,53 +47,41 @@ Attachments/
 - 문제 풀이 기록은 `problem.md`
 - 허브 문서는 `moc.md`
 - 일일 기록은 `daily.md`
-- 질문성 문서는 `00-default.md`로 만들고 `tags: kind/question`을 붙인다
+- 질문성 문서는 `00-default.md`로 만들고 정리 후 `concept`으로 승격한다
 
 ## 필드 의미
 
 - `type`: 노트의 정체성. 허용값: `note`, `concept`, `paper`, `project`, `experiment`, `idea`, `meeting`, `problem`, `moc`, `daily`
-- `status`: 작업 상태. 허용값: `inbox`, `draft`, `review`, `stable`, `archive`
+- `status`: 완성도. 허용값: `draft`, `stable`
+- `context`: 소속 맥락. 허용값: `lab`, `company`, `personal`
 - `aliases`: 다른 제목, 약어, 한글/영문 표기
-- `domain`: 큰 지식 분야 링크. 예: `[[Cryptography]]`, `[[Mathematics]]`
-- `parent`: 직접 상위 개념 또는 상위 허브 노트
-- `related`: 함께 연결해둘 가치가 있는 관련 노트
 - `source`: 논문, 책, 강의, URL, 메모 출처
-- `project`: 연결된 프로젝트 노트
-- `area`: 장기적 관심 영역
-- `prefer-view`: Current View가 참고하는 frontmatter 값. MOC는 보통 `reading`, 일반 작업 노트는 `live`
-- `tags`: 보조 분류용 태그. `area/*`, `topic/*`, `kind/*`, `priority/*` 정도만 사용
+- `prefer-view`: 보기 모드 힌트. MOC는 `read`, 일반 작업 노트는 `edit`
+- `tags`: 교차 주제 태그. `topic/*`만 사용
 
 ## 추천 태그 형식
 
-- `area/cryptography`
-- `area/programming`
-- `area/mathematics`
 - `topic/hqc`
-- `topic/reed-muller`
-- `kind/seminar`
-- `kind/troubleshooting`
-- `kind/reading-note`
-- `kind/question`
-- `kind/question-origin`
+- `topic/pqc`
+- `topic/rs-code`
+- `topic/rm-code`
+- `topic/finite-field`
+- `topic/side-channel`
 
 ## 질문 노트 처리 기준
 
-질문은 `type`이 아니라 `tags`로 처리한다. 질문은 대체로 영구적인 문서 형식이라기보다 정리 전 단계인 경우가 많기 때문이다.
+질문은 `type: note`로 만들고, 정리가 끝나면 `type: concept`으로 승격한다.
 
 새 질문 노트:
 
 ```yaml
 type: note
-status: inbox
-tags:
-  - kind/question
+status: draft
 ```
 
 정리가 끝나서 개념 문서로 승격되면:
 
 ```yaml
 type: concept
-status: review
-tags:
-  - kind/question-origin
+status: stable
 ```

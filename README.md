@@ -1,15 +1,11 @@
 ---
 type: note
 status: stable
+context:
 created: 2026-03-14T01:24
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:51
 aliases:
-domain:
-parent:
-related:
 source:
-project:
-area:
 prefer-view: read
 tags:
 ---
@@ -22,8 +18,8 @@ tags:
 
 - 폴더는 **보관 위치와 작업 흐름**을 위한 구조로만 사용한다.
 - 링크는 **개념 관계와 지식 구조**를 표현하는 주된 도구로 사용한다.
-- `type`, `status`는 **표준 분류 필드**로 고정해서 사용한다.
-- 태그는 `type`, `status`로 담기지 않는 **추가적인 가벼운 분류**에만 사용한다.
+- `type`, `status`, `context`는 **표준 분류 필드**로 고정해서 사용한다.
+- 태그는 폴더 경계를 횡단하는 **교차 주제(topic)** 분류에만 사용한다.
 - YAML properties는 **구조화된 메타데이터**를 담는 표준 필드로 사용한다.
 - `prefer-view`는 템플릿의 기본 속성으로 넣되, 설명용 분류가 아니라 **보기 모드 힌트**로만 사용한다.
 
@@ -241,15 +237,18 @@ MOC는 링크 허브다. 폴더보다 유연하다.
 # Coding Theory MOC
 
 ## 기초
+
 - [[Error-Correcting Codes]]
 - [[Generator Matrix]]
 - [[Parity-Check Matrix]]
 
 ## 주요 코드
+
 - [[Reed-Solomon Code]]
 - [[Reed-Muller Code]]
 
 ## 암호와의 연결
+
 - [[Syndrome Decoding]]
 - [[Quasi-Cyclic Code]]
 - [[HQC]]
@@ -298,117 +297,53 @@ MOC는 링크 허브다. 폴더보다 유연하다.
 
 `status`는 **이 노트가 얼마나 정리되었는지**를 나타내는 고정 분류다.
 
-예시:
+허용값:
 
-- `inbox`
-- `draft`
-- `review`
-- `stable`
-- `archive`
+- `draft` — 작성 중이거나 아직 미완인 문서
+- `stable` — 충분히 정리되어 완성된 문서
 
-즉, `status`는 노트의 **완성도나 관리 상태**다.
+즉, `status`는 노트의 **완성도**다. 2개 값만 사용한다.
 
 예를 들어:
 
-- 방금 만든 노트는 `status: inbox`
-- 어느 정도 정리했지만 아직 미완이면 `status: draft`
+- 방금 만든 노트는 `status: draft`
 - 충분히 다듬어졌으면 `status: stable`
 
-## 5.3 `tags`
+아카이브 상태는 `90 Archive/` 폴더가 이미 표현하므로 별도 status 값이 불필요하다.
 
-`tags`는 `type`, `status`처럼 고정된 핵심 분류가 아니라, **추가적인 관점에서 가볍게 묶고 싶을 때** 쓰는 보조 분류다.
+## 5.3 `context`
 
-즉, 태그는 이런 질문에 답할 때 쓴다.
+`context`는 **이 노트가 어떤 소속/맥락에서 작성되었는지**를 나타내는 분류다.
 
-- 이 노트는 어떤 작업 성격을 가지는가
-- 나중에 어떤 묶음으로 다시 보고 싶은가
-- 여러 `type`에 걸쳐 공통으로 보고 싶은 것은 무엇인가
+허용값:
 
-예를 들어 아래는 태그로 적합하다.
+- `lab` — 연구실 관련
+- `company` — 회사/산학 관련
+- `personal` — 개인 공부/프로젝트
 
-- `area/cryptography`
-- `area/coding-theory`
-- `area/mathematics`
-- `area/programming`
-- `topic/hqc`
-- `topic/reed-solomon`
-- `topic/reed-muller`
-- `kind/troubleshooting`
-- `kind/seminar`
-- `kind/reading-note`
-- `priority/high`
+폴더는 주제별 구조이고, `context`는 조직별 맥락을 분리한다. 하나의 노트가 여러 맥락에 속할 수 있으므로 폴더가 아닌 property로 관리한다.
 
-여기서 중요한 점은, **태그는 꼭 필요한 것만 넣는다**는 것이다.
+## 5.4 `tags`
 
-## 5.4 왜 `type`과 `status`를 태그로만 두지 않는가
+`tags`는 **폴더 경계를 횡단하는 교차 주제**를 표현할 때만 쓰는 보조 분류다.
 
-가능은 하지만, 이 Vault에서는 권장하지 않는다.
+태그의 핵심 원칙:
 
-이유는 단순하다.
+- **`topic/` 접두사만 사용한다** — 폴더나 다른 property와 중복되지 않는 교차 주제만 태그로 관리한다.
+- **`area/` 태그는 사용하지 않는다** — 폴더 구조(`20 Knowledge/Cryptography/` 등)가 이미 분야를 표현한다.
+- **`kind/` 태그는 사용하지 않는다** — `type` property가 이미 노트의 성격을 표현한다.
 
-`type`과 `status`는 모든 노트에서 거의 반드시 쓰는 **핵심 표준 필드**다. 이런 값은 YAML의 독립 속성으로 두는 편이 검색, 정렬, Dataview 활용, 템플릿 일관성 면에서 더 안정적이다.
+태그로 적합한 예:
 
-반면 태그는 값이 더 자유롭고, 늘어나기 쉽고, 운영 중에 바뀌기 쉽다.
+- `topic/hqc` — Cryptography, Coding Theory, Papers 등 여러 폴더에 걸침
+- `topic/pqc` — 여러 분야를 관통하는 주제
+- `topic/rs-code` — 교차 주제
 
-즉:
+태그에 넣지 않을 것:
 
-- `type`, `status`는 **필수 표준값**
-- `tags`는 **선택적 보조값**
-
-으로 생각하면 된다.
-
-## 5.5 태그에는 무엇을 넣는가
-
-태그에는 아래 세 종류만 넣는 것을 권장한다.
-
-### 1) 분야(area)
-
-노트가 주로 속한 작업 영역을 묶고 싶을 때.
-
-예시:
-
-- `area/cryptography`
-- `area/coding-theory`
-- `area/mathematics`
-- `area/programming`
-- `area/research`
-
-### 2) 주제(topic)
-
-가끔 검색이나 묶음 보기에서 빠르게 다시 보고 싶은 반복 주제.
-
-예시:
-
-- `topic/hqc`
-- `topic/rm-code`
-- `topic/rs-code`
-- `topic/finite-field`
-- `topic/memory-safety`
-
-단, 이 주제가 독립 노트로 충분히 자주 쓰인다면 태그보다 링크를 우선한다.
-
-### 3) 작업 성격(kind)
-
-노트의 사용 맥락을 느슨하게 묶고 싶을 때.
-
-예시:
-
-- `kind/troubleshooting`
-- `kind/reading-note`
-- `kind/seminar`
-- `kind/implementation`
-- `kind/reference`
-
-## 5.6 태그에 넣지 않을 것
-
-아래는 태그에 굳이 중복해서 넣지 않는다.
-
-- `type/concept`, `type/paper` 같은 값
-- `status/draft`, `status/stable` 같은 값
-
-이 값들은 이미 `type`, `status` 속성에 들어가 있으므로 태그에 또 넣으면 중복이 된다.
-
-즉, 이제부터의 권장 방식은 아래다.
+- 폴더가 이미 표현하는 분야 (area/cryptography 등)
+- `type`이 이미 표현하는 성격 (kind/reading-note 등)
+- `type`, `status`, `context` 값의 중복
 
 좋은 예:
 
@@ -416,9 +351,8 @@ MOC는 링크 허브다. 폴더보다 유연하다.
 ---
 type: concept
 status: draft
+context: lab
 tags:
-  - area/cryptography
-  - area/coding-theory
   - topic/hqc
 ---
 ```
@@ -429,9 +363,10 @@ tags:
 ---
 type: concept
 status: draft
+context: lab
 tags:
-  - type/concept
-  - status/draft
+  - area/cryptography
+  - kind/reading-note
   - topic/hqc
 ---
 ```
@@ -440,38 +375,20 @@ tags:
 
 # 6. 표준 태그 목록
 
-이 Vault의 권장 태그 후보는 아래와 같다.
+이 Vault에서 태그는 `topic/` 접두사만 사용한다. 폴더 경계를 횡단하는 교차 주제만 태그로 관리한다.
 
 ```text
-area/cryptography
-area/coding-theory
-area/mathematics
-area/programming
-area/research
-area/computer-science
-
 topic/hqc
+topic/pqc
 topic/rs-code
 topic/rm-code
+topic/finite-field
 topic/syndrome-decoding
 topic/quasi-cyclic
-topic/finite-field
-topic/memory-safety
-topic/concurrency
-
-topic/pqc
-kind/troubleshooting
-kind/reading-note
-kind/seminar
-kind/implementation
-kind/reference
-kind/question
-kind/question-origin
-priority/high
-priority/low
+topic/side-channel
 ```
 
-모두를 항상 다 쓰라는 뜻은 아니다. 보통 한 노트에 0~3개 정도면 충분하다.
+모두를 항상 다 쓰라는 뜻은 아니다. 보통 한 노트에 0~2개 정도면 충분하다. 필요에 따라 새로운 `topic/` 태그를 추가할 수 있다.
 
 ---
 
@@ -483,14 +400,11 @@ priority/low
 ---
 type:
 status:
+context:
 created:
 updated:
 aliases:
-domain:
-parent:
-related:
 source:
-project:
 prefer-view:
 tags:
 ---
@@ -517,15 +431,22 @@ tags:
 
 ### `status`
 
-노트의 정리 상태를 나타낸다.
+노트의 완성도를 나타낸다.
 
 허용값:
 
-- `inbox`
-- `draft`
-- `review`
-- `stable`
-- `archive`
+- `draft` — 작성 중이거나 미완
+- `stable` — 충분히 정리됨
+
+### `context`
+
+노트의 소속 맥락을 나타낸다.
+
+허용값:
+
+- `lab` — 연구실
+- `company` — 회사/산학
+- `personal` — 개인
 
 ### `created`
 
@@ -553,26 +474,6 @@ tags:
 - 한국어/영어 다른 표기
 - 자주 쓰는 변형
 
-### `domain`
-
-노트가 속한 상위 분야 링크 목록.
-
-예시:
-
-```yaml
-domain:
-  - "[[Cryptography]]"
-  - "[[Coding Theory]]"
-```
-
-### `parent`
-
-직접 상위 개념 하나를 지정할 때 사용한다.
-
-### `related`
-
-직접 관련 있는 노트 링크 목록.
-
 ### `source`
 
 외부 출처 또는 참고 자료.
@@ -584,34 +485,52 @@ domain:
 - 명세 문서명
 - URL
 
-### `project`
-
-특정 프로젝트와 연결되는 경우 사용한다.
-
 ### `prefer-view`
 
-노트의 기본 보기 모드 힌트.
+노트의 기본 보기 모드 힌트. Set View Mode per Note 플러그인이 사용한다.
 
 허용값:
 
-- `reading`
-- `live`
-- `source`
-
-이 문서에서는 설명 규칙을 따로 두지 않는다. 템플릿 기본 속성으로만 포함한다.
+- `read`
+- `edit`
 
 ### `tags`
 
-보조 분류용 태그 목록.
+교차 주제 분류용 태그 목록.
 
 권장 접두:
 
-- `area/`
-- `topic/`
-- `kind/`
-- `priority/`
+- `topic/` — 폴더 경계를 횡단하는 주제만 사용
 
-## 7.2 최소 권장 속성
+## 7.2 노트 간 관계는 본문에서 표현한다
+
+상위 개념, 관련 개념, 하위 개념 등 노트 사이의 관계는 frontmatter가 아니라 **본문의 링크 섹션**에서 표현한다.
+
+이유:
+
+- Obsidian의 그래프와 백링크는 링크가 frontmatter에 있든 본문에 있든 동일하게 작동한다.
+- 본문에 적으면 내용과 함께 보이므로 맥락을 파악하기 쉽다.
+- 한 곳에서만 관리하면 중복 유지보수가 사라진다.
+
+즉, 아래처럼 사용한다.
+
+```md
+## 상위 개념
+
+- [[Cryptography]]
+- [[Coding Theory]]
+
+## 관련 개념
+
+- [[Reed-Solomon Code]]
+- [[HQC]]
+
+## 같이 볼 것
+
+- [[Syndrome Decoding]]
+```
+
+## 7.3 최소 권장 속성
 
 모든 노트에 모든 속성을 강제하지 않는다. 최소 권장 세트는 아래다.
 
@@ -619,6 +538,7 @@ domain:
 ---
 type:
 status:
+context:
 created:
 updated:
 prefer-view:
@@ -642,29 +562,23 @@ tags:
 - 실험이면 `40 Experiments/`
 - 관심 영역이나 활동 기록이면 `50 Areas/`
 
-## 8.2 질문성 문서는 `type`이 아니라 `tags`로 처리한다
+## 8.2 질문성 문서 처리
 
-질문은 대체로 영구적인 문서 형식이라기보다 정리 전 단계인 경우가 많다. 그래서 `type: question`은 두지 않고, 대신 태그로 처리한다.
+질문은 `type: note`로 만들고, 정리가 끝나면 `type: concept`으로 승격한다.
 
 새 질문 노트:
 
 ```yaml
 type: note
-status: inbox
-tags:
-  - kind/question
+status: draft
 ```
 
 정리가 끝나서 개념 문서로 승격되면:
 
 ```yaml
 type: concept
-status: review
-tags:
-  - kind/question-origin
+status: stable
 ```
-
-질문이 "형식"이면 `type`, 질문이 "상태나 성격"이면 `tags`가 더 낫다. 이 Vault에서는 후자를 채택한다.
 
 ## 8.3 아이디어는 idea → concept로 승격시킨다
 
@@ -703,12 +617,10 @@ tags:
 ---
 type: concept
 status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-parent:
-related:
 source:
 prefer-view: edit
 tags:
@@ -729,15 +641,19 @@ tags:
 ## 자주 헷갈리는 점
 
 ## 상위 개념
-- 
+
+-
 
 ## 하위 개념
-- 
+
+-
 
 ## 관련 개념
-- 
+
+-
 
 ## 같이 볼 것
+
 - [[]]
 ```
 
@@ -747,11 +663,10 @@ tags:
 ---
 type: paper
 status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
 source:
 prefer-view: edit
 tags:
@@ -776,9 +691,11 @@ tags:
 ## 내가 배운 점
 
 ## 연결되는 개념
+
 - [[]]
 
 ## 나중에 다시 볼 질문
+
 - [ ]
 ```
 
@@ -788,11 +705,10 @@ tags:
 ---
 type: project
 status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
 source:
 prefer-view: edit
 tags:
@@ -807,13 +723,16 @@ tags:
 ## 현재 상태
 
 ## 해야 할 일
+
 - [ ]
 
 ## 관련 노트
+
 - [[]]
 
 ## 참고 자료
-- 
+
+-
 ```
 
 ## 10.4 meeting 템플릿
@@ -821,14 +740,11 @@ tags:
 ```md
 ---
 type: meeting
-status: inbox
+status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
-project:
-area:
 prefer-view: edit
 tags:
 ---
@@ -842,9 +758,11 @@ tags:
 ## 결정 사항
 
 ## 다음 행동
+
 - [ ]
 
 ## 연결할 노트
+
 - [[]]
 ```
 
@@ -853,16 +771,12 @@ tags:
 ```md
 ---
 type: idea
-status: inbox
+status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-parent:
-related:
 source:
-project:
-area:
 prefer-view: edit
 tags:
 ---
@@ -878,9 +792,11 @@ tags:
 ## 검증할 점
 
 ## 연결할 개념
+
 - [[]]
 
 ## 다음 행동
+
 - [ ]
 ```
 
@@ -890,14 +806,11 @@ tags:
 ---
 type: problem
 status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
 source:
-project:
-area:
 prefer-view: edit
 tags:
 ---
@@ -913,6 +826,7 @@ tags:
 ## 배운 점
 
 ## 관련 노트
+
 - [[]]
 ```
 
@@ -922,9 +836,9 @@ tags:
 ---
 type: daily
 status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
-area:
 prefer-view: edit
 tags:
 ---
@@ -934,14 +848,17 @@ tags:
 ## 오늘 한 일
 
 ## 배운 것
+
 -
 
 ## 생긴 질문
+
 -
 
 ## 진행 중인 프로젝트 / 활동
 
 ## 연결할 노트
+
 - [[]]
 ```
 
@@ -951,12 +868,10 @@ tags:
 ---
 type: moc
 status: stable
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
-source:
 prefer-view: read
 tags:
 ---
@@ -964,15 +879,19 @@ tags:
 # {{title}}
 
 ## 핵심 개념
+
 - [[]]
 
 ## 하위 주제
+
 - [[]]
 
 ## 관련 프로젝트
+
 - [[]]
 
 ## 관련 문헌
+
 - [[]]
 ```
 
@@ -985,37 +904,31 @@ tags:
 ```md
 ---
 type: concept
-status: review
+status: draft
+context: lab
 created: 2026-03-14
 updated: 2026-03-14
 aliases:
   - Hamming Quasi-Cyclic
-domain:
-  - "[[Post-Quantum Cryptography]]"
-  - "[[Code-based Cryptography]]"
-parent: "[[Code-based Cryptography]]"
-related:
-  - "[[Reed-Solomon Code]]"
-  - "[[Reed-Muller Code]]"
-  - "[[Syndrome Decoding]]"
-  - "[[Quasi-Cyclic Code]]"
+source:
 prefer-view: edit
 tags:
-  - area/cryptography
-  - area/coding-theory
   - topic/hqc
 ---
 
 # HQC
 
 ## 한 줄 정의
+
 코드 기반 공개키 암호/KEM 계열 방식.
 
 ## 상위 개념
+
 - [[Post-Quantum Cryptography]]
 - [[Code-based Cryptography]]
 
 ## 관련 개념
+
 - [[Reed-Solomon Code]]
 - [[Reed-Muller Code]]
 - [[Syndrome Decoding]]
@@ -1027,28 +940,29 @@ tags:
 ```md
 ---
 type: idea
-status: inbox
+status: draft
+context:
 created: 2026-03-14
 updated: 2026-03-14
-domain:
-  - "[[Coding Theory]]"
-related:
-  - "[[Reed-Muller Code]]"
+aliases:
+source:
 prefer-view: edit
 tags:
-  - area/coding-theory
   - topic/rm-code
 ---
 
 # 왜 RM 코드는 다수결 decoding이 가능한가?
 
 ## 핵심 아이디어
+
 RM 코드의 다수결 복호 원리를 정리해볼 수 있지 않을까?
 
 ## 왜 이게 떠올랐는가
+
 강의에서 "다수결 원리로 복호가 가능하다"고 했는데, 직관이 불명확하다.
 
 ## 현재 생각
+
 아직 정리 중.
 ```
 
@@ -1057,32 +971,32 @@ RM 코드의 다수결 복호 원리를 정리해볼 수 있지 않을까?
 ```md
 ---
 type: meeting
-status: inbox
+status: draft
+context: company
 created: 2026-03-14
 updated: 2026-03-14
-domain:
-  - "[[Cryptography]]"
-related:
-  - "[[HQC]]"
-project: "[[HQC 구현]]"
+aliases:
 prefer-view: edit
 tags:
-  - area/cryptography
-  - kind/seminar
+  - topic/hqc
 ---
 
 # 260314 HQC 구현 회의
 
 ## 참석자
+
 - 홍길동, 김철수
 
 ## 논의 내용
+
 FAFFT 파라미터 적용 방안 논의.
 
 ## 결정 사항
+
 다음 주까지 파라미터 벤치마크 수행.
 
 ## 다음 행동
+
 - [ ] FAFFT 파라미터 벤치마크
 ```
 
@@ -1092,25 +1006,28 @@ FAFFT 파라미터 적용 방안 논의.
 ---
 type: moc
 status: stable
+context:
 created: 2026-03-14
 updated: 2026-03-14
 prefer-view: read
 tags:
-  - area/coding-theory
 ---
 
 # Coding Theory MOC
 
 ## 기초
+
 - [[Error-Correcting Codes]]
 - [[Generator Matrix]]
 - [[Parity-Check Matrix]]
 
 ## 주요 코드
+
 - [[Reed-Solomon Code]]
 - [[Reed-Muller Code]]
 
 ## 암호와의 연결
+
 - [[Syndrome Decoding]]
 - [[Quasi-Cyclic Code]]
 - [[HQC]]
@@ -1123,25 +1040,24 @@ tags:
 ```md
 ---
 type: note
-status: inbox
+status: draft
+context:
 created: 2026-03-14
 updated: 2026-03-14
-domain:
-  - "[[Coding Theory]]"
-related:
-  - "[[Reed-Muller Code]]"
+aliases:
+source:
 prefer-view: edit
 tags:
-  - area/coding-theory
-  - kind/question
 ---
 
 # 왜 RM 코드는 다수결 decoding이 가능한가?
 
 ## 한 줄 요약
+
 아직 모름.
 
 ## 핵심 내용
+
 RM 코드는 다수결 원리로 복호가 가능하다고 하는데, 직관이 불명확하다.
 ```
 
@@ -1150,24 +1066,23 @@ RM 코드는 다수결 원리로 복호가 가능하다고 하는데, 직관이 
 ```md
 ---
 type: concept
-status: review
+status: stable
+context:
 created: 2026-03-14
 updated: 2026-03-15
-domain:
-  - "[[Coding Theory]]"
-related:
-  - "[[Reed-Muller Code]]"
+aliases:
+source:
 prefer-view: edit
 tags:
-  - area/coding-theory
-  - kind/question-origin
 ---
 
 # 왜 RM 코드는 다수결 decoding이 가능한가?
 
 ## 한 줄 정의
+
 RM 코드의 구조적 특성으로 인해 다수결 복호가 가능하다.
 
 ## 핵심 직관
+
 (정리된 내용)
 ```

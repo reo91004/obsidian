@@ -1,15 +1,11 @@
 ---
 type: note
-status: inbox
+status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-parent:
-related:
 source:
-project:
-area:
 prefer-view: edit
 tags:
 ---

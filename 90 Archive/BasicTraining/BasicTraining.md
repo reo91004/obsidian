@@ -1,16 +1,12 @@
 ---
 type: moc
 status: stable
+context: lab
 created: 2026-01-18T16:49
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:39
 aliases:
-domain:
-  - "[[Cryptography]]"
-related:
-area:
 prefer-view: read
 tags:
-  - area/cryptography
 ---
 
 %% Begin Waypoint %%

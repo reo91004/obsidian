@@ -1,16 +1,12 @@
 ---
 type: moc
 status: stable
+context:
 created: 2026-01-15T11:16
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:39
 aliases:
-domain:
-  - "[[Mathematics]]"
-related:
-area:
 prefer-view: read
 tags:
-  - area/mathematics
 ---
 
 %% Begin Waypoint %%

@@ -1,20 +1,16 @@
 ---
 type: concept
 status: stable
+context:
 created: 2026-01-20
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:38
 aliases:
-domain:
-  - "[[Cryptography]]"
-parent:
-related:
+  - SCA
+  - 부채널 공격
+  - PACS 02 Introduction
 source: PACS Lecture
-project:
-area:
 prefer-view: edit
 tags:
-  - area/cryptography
-  - kind/reading-note
 ---
 
 # 0️⃣ Introduction to [[Physical Attacks]]

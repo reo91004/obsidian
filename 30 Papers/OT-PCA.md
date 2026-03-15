@@ -1,21 +1,14 @@
 ---
 type: paper
-status: review
+status: draft
+context: lab
 created: 2026-03-13
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:38
 aliases:
-domain:
-  - "[[Cryptography]]"
-related:
-  - "[[HQC]]"
 source:
-project:
-area:
 prefer-view: edit
 tags:
-  - area/cryptography
   - topic/hqc
-  - kind/reading-note
 ---
 
 제공해주신 논문 "OT-PCA: New Key-Recovery Plaintext-Checking Oracle Based Side-Channel Attacks on HQC with Offline Templates"의 내용을 바탕으로 각 문단과 섹션에 대해 빠짐없이 상세하게 정리해 드립니다.

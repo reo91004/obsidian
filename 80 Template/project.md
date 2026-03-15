@@ -1,13 +1,11 @@
 ---
 type: project
-status: active
+status: draft
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
 source:
-area:
 prefer-view: edit
 tags:
 ---

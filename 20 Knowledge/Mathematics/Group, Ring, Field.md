@@ -1,21 +1,15 @@
 ---
 type: concept
 status: stable
+context:
 created: 2026-01-14
-updated: 2026-03-15T01:47
+updated: 2026-03-15T19:39
 aliases:
   - Finite Field
   - 유한체
-domain:
-  - "[[Mathematics]]"
-parent:
-related:
 source:
-project:
-area:
 prefer-view: edit
 tags:
-  - area/mathematics
   - topic/finite-field
 ---
 ## 0. 이 문서의 목표

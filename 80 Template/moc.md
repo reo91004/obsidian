@@ -1,12 +1,10 @@
 ---
 type: moc
 status: stable
+context:
 created: "{{date:YYYY-MM-DD}}"
 updated: "{{date:YYYY-MM-DD}}"
 aliases:
-domain:
-related:
-area:
 prefer-view: read
 tags:
 ---
